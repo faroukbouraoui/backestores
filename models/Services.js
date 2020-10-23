@@ -9,6 +9,12 @@ const servicesSchema = new mongoose.Schema({
         type:String ,
         required: true
     },
+    offres:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Offres"
+        }
+    ]
 
 
 })

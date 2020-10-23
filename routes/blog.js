@@ -36,25 +36,26 @@ router.get('/readall', async(req, res)=>{
       res.status(400).json({msg: err})
     }
   })
-  /*router.put('/update', async (req,res)=>{
+  router.patch('/update/', async (req,res)=>{
     const newtitle = req.body.newtitle
     const newdauthor = req.body.newdauthor
     const newdescription= req.body.newdescription
-    const id = req.body.id
+    const newservice = req.body.services
     
   
     try {
      await BlogModel.findById(id,(err,updatedblog)=>{
-        updatedblog.title = newtitle
-        updatedblog.author=newdauthor
-        updatedblog.description=newdescription
+        updatedblog.title = newtitle,
+        updatedblog.author=newdauthor,
+        updatedblog.description=newdescription,
+        updateblog.services= newservice,
         updatedblog.save()
         res.send("update")
       })
     }catch(err){
       console.log(err)
     }
-  })*/
+  })
 
   router.get('/read/:id',async (req, res) =>{
      BlogModel.findById(req.params.id , (err,result)=>{

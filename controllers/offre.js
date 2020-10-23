@@ -1,13 +1,17 @@
 const mongoose = require("mongoose")
 
 const Offre = require ('../models/Offres')
-const Service = require ('../models/Services')
 
-exports.offres_get_all = (req, res, next)=>{
+
+exports.offres_get_all = (req, res)=>{
     Offre.find()
-    .populate(service,service._id).then(offre =>{
+    .populate('services','name').exec().then(offre =>{
         res.status(200).json(offre)
-    }).catch(err =>{
-        res.status(500).json({error: err})
-    })
+    }).catch(err => {
+        res.status(500).json({
+          error: err
+        });
+      });
 }
+
+

@@ -17,16 +17,35 @@ router.post('/new', async (req,res)=>{
       res.status(400).json({msg: err})
     }
   })
-  const services = require('../controllers/services')
-const { response } = require('express')
-  router.get('/All',services.findAll)
 
 
-router.delete('/delete/:id',async(req, res) =>{
+  router.get('/all',  (req,res)=>{
+    serviceModel.find().then(services =>{
+        res.send(services)
+    }).catch(err =>{
+        res.status(500).send({
+            message:err.message
+        })
+    })
+})
+
+
+router.patch ('/update/:id',async(req, res, next)=>{
+  
+  try{
     const id = req.params.id
-    await serviceModel.findByIdAndRemove(id).exec()
-    res.send("deleted")
-  })
+    const updates = req.body
+    const result = await serviceModel.findByIdAndUpdate(id, updates)
+    if(!result){
+      throw createError(404, 'service not exist')
+    }
+    res.send(result)
+  }catch(error){
+    console.log(error.message)
+  }
+})
+
+
 
 router.post('/create',(req,res)=>{
   offreModel.findById(req.params.id,(err, offre)=>{
@@ -44,5 +63,14 @@ router.post('/create',(req,res)=>{
 
   })
 })
+router.delete('/delete/:id',async(req,res)=>{
+  try{
+      const service = await serviceModel.findByIdAndDelete(req.params.id)
+      if(!service) throw Error('not found blog');
+      res.status(200).json({success:true})
+  }catch(err){
+    res.status(400).json({msg: err})
+  }
+}) 
 
 module.exports= router
