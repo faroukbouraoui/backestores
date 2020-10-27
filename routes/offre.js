@@ -7,7 +7,7 @@ const router = express.Router()
 
 const OffreController = require('../controllers/offre')
 
-/*router.post("/:id", (req, res) =>{
+router.post("/:id", (req, res) =>{
   serviceModel.findOne(req.body).then(service =>{
     return offreModel.findOneAndUpdate({_id:req.params.id},
       {$push:{services: service._id}},{new: true})
@@ -17,7 +17,7 @@ const OffreController = require('../controllers/offre')
   }).catch(err =>{
     res.json(err)
   })
-})*/
+})
 
 router.post ("/neww",(req,res)=>{
   Offre.create(req.body).then(offre =>{

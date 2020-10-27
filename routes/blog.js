@@ -91,7 +91,29 @@ router.get('/readall', async(req, res)=>{
       res.status(400).json({msg: err})
     }
   })
+  router.route('/update-blog/:id').put((req, res, next) => {
+    BlogModel.findByIdAndUpdate(req.params.id, {
+      $set: req.body
+    }, (error, data) => {
+      if (error) {
+        return next(error);
+        console.log(error)
+      } else {
+        res.json(data)
+        console.log('Student updated successfully !')
+      }
+    })
+  })
      
+  router.get('/update/:id', (req,res)=>{
+    BlogModel.findById(req.params.id,(error,data)=>{
+      if (error){
+        return error
+      }else{
+        res.json(data)
+      }
+    })
+  })
 
 
 

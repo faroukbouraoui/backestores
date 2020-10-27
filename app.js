@@ -8,6 +8,8 @@ const serviceRouter = require('./routes/services')
 const offreRouter = require('./routes/offre')
 const leadRouter = require('./routes/lead')
 const partenaireRouter = require ('./routes/partenaire')
+const contactRouter = require('./routes/contact')
+const multer = require("multer");
 var app = express();
 app.use(express.json())
 app.use(cors())
@@ -74,9 +76,12 @@ app.use((req, res, next) => {
 
 
 
+
+
 app.use('/blogs',blogRouter)
 app.use('/services',serviceRouter)
 app.use('/offres',offreRouter)
 app.use('/leads',leadRouter)
 app.use('/partenaires',partenaireRouter)
+app.use('/contact',contactRouter)
 app.listen(4000, ()=> console.log('server started at : 4000'))
