@@ -9,6 +9,8 @@ const offreRouter = require('./routes/offre')
 const leadRouter = require('./routes/lead')
 const partenaireRouter = require ('./routes/partenaire')
 const contactRouter = require('./routes/contact')
+const authRouter = require('./routes/auth.route')
+const userRouter = require('./routes/user.route')
 const multer = require("multer");
 var app = express();
 app.use(express.json())
@@ -77,7 +79,8 @@ app.use((req, res, next) => {
 
 
 
-
+app.use('/api', authRouter)
+app.use('/api', userRouter)
 app.use('/blogs',blogRouter)
 app.use('/services',serviceRouter)
 app.use('/offres',offreRouter)

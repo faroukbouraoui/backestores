@@ -72,5 +72,13 @@ router.delete('/delete/:id',async(req,res)=>{
     res.status(400).json({msg: err})
   }
 }) 
-
+router.get('/update/:id', (req, res)=>{
+  serviceModel.findById(req.params.id, (error,data)=>{
+    if(error){
+      return error
+    }else{
+      res.json(data)
+    }
+  })
+})
 module.exports= router
