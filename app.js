@@ -9,14 +9,19 @@ const offreRouter = require('./routes/offre')
 const leadRouter = require('./routes/lead')
 const partenaireRouter = require ('./routes/partenaire')
 const contactRouter = require('./routes/contact')
-const authRouter = require('./routes/auth.route')
-const userRouter = require('./routes/user.route')
+const userRouter = require ('./routes/user.route')
 const multer = require("multer");
+const session = require('express-session')
 var app = express();
 app.use(express.json())
 app.use(cors())
 app.use(morgan("dev"));
-
+app.use(session({
+  secret: 'farouk',
+  resave: false,
+  saveUninitialized:true,
+  cookie:{secure: false}
+}))
 
 /*app.post('/new', async (req,res)=>{
   const title = req.body.title
@@ -62,7 +67,7 @@ app.get('/read', async(req,res)=>{
 
 
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -73,14 +78,13 @@ app.use((req, res, next) => {
     return res.status(200).json({});
   }
   next();
-});
+});*/
 
 
 
 
 
-app.use('/api', authRouter)
-app.use('/api', userRouter)
+app.use('/user',userRouter)
 app.use('/blogs',blogRouter)
 app.use('/services',serviceRouter)
 app.use('/offres',offreRouter)
