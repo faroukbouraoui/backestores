@@ -20,7 +20,7 @@ router.post("/:id", (req, res) =>{
 })
 
 router.post ("/neww",(req,res)=>{
-  Offre.create(req.body).populate('services').then(offre =>{
+  Offre.create(req.body).then(offre =>{
     res.status(200).json(offre)
   }).catch(err =>{
     res.json(err)
@@ -34,7 +34,7 @@ router.post('/new', async (req, res) =>{
       name:req.body.name,
       description:req.body.description,
       price:req.body.price
-  }).populate('services')
+  })
   try{
       const newoffre = await offre.save()
   if(!offre) throw Error('something happned')

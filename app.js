@@ -12,6 +12,7 @@ const contactRouter = require('./routes/contact')
 const userRouter = require ('./routes/user.route')
 const multer = require("multer");
 const session = require('express-session')
+const CategoriesServiceRouter = require('./routes/categoriesService')
 var app = express();
 app.use(express.json())
 app.use(cors())
@@ -91,4 +92,5 @@ app.use('/offres',offreRouter)
 app.use('/leads',leadRouter)
 app.use('/partenaires',partenaireRouter)
 app.use('/contact',contactRouter)
+app.use('/category', CategoriesServiceRouter)
 app.listen(4000, ()=> console.log('server started at : 4000'))
